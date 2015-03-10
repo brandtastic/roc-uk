@@ -1,0 +1,27 @@
+$desktop: "only screen and (min-width : 31em)";
+$tablet: "only screen and (max-width : 65em)";
+$tablet-portrait: "only screen and (max-width : 65em) and (orientation: portrait)"; // SL added
+$phablet: "only screen and (max-width : 45em)";
+$phone: "only screen and (max-width : 31em)";
+ 
+@mixin phone-hide {
+    @media #{$phone} {
+        display: none;  
+    }   
+}
+@mixin phone-show {
+	display: none;
+    @media #{$phone} {
+        display: block;  
+    }   
+}
+@mixin full-width {
+    @media #{$phone} {
+        width: 100%;    
+    }   
+}
+@mixin auto-height {
+	@media #{$phone} {
+		height: auto;
+	}	
+}

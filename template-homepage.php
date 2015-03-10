@@ -1,56 +1,21 @@
 <?php /* Template Name: Homepage */ get_header(); ?>
 
-	<div id="slider" class="skdslider">
-		<ul>
-			<?php 
-				// WP_Query arguments
-				$args = array (
-					'post_type'              => 'slide',
-				);
-				
-				// The Query
-				$query = new WP_Query( $args );
-				
-				// The Loop
-				if ( $query->have_posts() ) {
-					while ( $query->have_posts() ) {
-						$query->the_post();
-				?>
-					<li><?php the_post_thumbnail('full'); ?>
-						<div class="container">
+	<div id="slider">
+		<?php if(get_field('homepage_slider')) : ?>
+			<ul id="home-slider">
+			<?php while(the_repeater_field('homepage_slider')) : ?>
+				<li style="background-image: url('<?php the_sub_field('image'); ?>');">
+					<div class="container">
 						<div class="slide-desc">
-							<h1><?php the_title(); ?></h1>
-							<?php the_content(); ?>
+							<h2><?php the_sub_field('title'); ?></h2>
+							<p><?php the_sub_field('text'); ?></p>
 						</div>
-						</div>
-					</li> 
-						
-				<?php
-					}
-				} else {
-					// no posts found
-				}
-				
-				// Restore original Post Data
-				wp_reset_postdata();
-			?>
-		</ul>
+					</div>
+				</li>
+			<?php endwhile; ?>
+			</ul>
+		<?php endif; ?>
 	</div>
-	
-	<script type="text/javascript">
-		jQuery(document).ready(function(){
-			jQuery('#slider').skdslider({
-			'delay':5000, // Delay duration between two slides in micro seconds. 
-			'fadeSpeed': 2000, // Fading Speed in micro seconds.
-			'showNav': false,
-			'showNextPrev': true, // It will show/hide navigation icon.
-			'animationType': 'sliding', // It will show/hide navigation icon.
-			'numericNav': false // If true, navigation will be numeric
-			});
-		});
-	</script>
-	
-	<script src="<?php bloginfo('template_directory'); ?>/js/skdslider.min.js"></script>
 	
 	<div class="signposts">
 		<ul class="container">

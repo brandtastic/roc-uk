@@ -1,55 +1,14 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
+<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/lib/modernizr-latest.js" type="text/javascript"></script>
 <meta charset="<?php bloginfo('charset'); ?>">
-<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' />
+<meta name="viewport" content="width=device-width"/>  
+<?php get_template_part('includes/build', 'meta'); ?>
 <title><?php bloginfo('name'); ?></title>
 <link href="<?php bloginfo('template_directory'); ?>/css/skdslider.css" rel="stylesheet">
 <?php wp_head(); ?>
-<script type="text/javascript">
-	jQuery(function() {
-		var pull 		= jQuery('#pull');
-			menu 		= jQuery('nav ul');
-			menuHeight	= menu.height();
-
-		jQuery(pull).on('click', function(e) {
-			e.preventDefault();
-			menu.slideToggle();
-		});
-
-		jQuery(window).resize(function(){
-    		var w = jQuery(window).width();
-    		if(w > 767 && menu.is(':hidden')) {
-    			menu.removeAttr('style');
-    		}
-		});
-		
-		jQuery('#mob-subnav > ul > li:has(ul)').addClass("has-sub");
-		jQuery('#mob-subnav > ul > li > a').click(function() {
-		
-			var checkElement = jQuery(this).next();
-		
-			jQuery('#mob-subnav li').removeClass('active');
-			jQuery(this).closest('li').addClass('active');	
-		
-			if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
-				jQuery(this).closest('li').removeClass('active');
-				checkElement.slideUp('normal');
-			}
-		
-			if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
-				jQuery('#mob-subnav ul ul:visible').slideUp('normal');
-				checkElement.slideDown('normal');
-			}
-		
-			if (checkElement.is('ul')) {
-				return false;
-			} else {
-				return true;	
-			}
-		});
-	});
-</script>
 </head>
 	
 <body <?php body_class(); ?>>

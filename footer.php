@@ -34,6 +34,9 @@
 
 </div><!-- container -->
 
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/lib/jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/production.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/js/font-awesome/css/font-awesome.min.css">
 <?php wp_footer(); ?>
 </body>
 </html>

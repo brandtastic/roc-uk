@@ -1,16 +1,5 @@
 <?php
 
-function add_main_stylesheet() {
-	wp_enqueue_style('style', get_stylesheet_uri());
-}
-add_action('wp_enqueue_scripts', 'add_main_stylesheet');
-
-
-function prefix_enqueue_awesome() {
-	wp_enqueue_style( 'prefix-font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', array(), '4.3.0' );
-}
-add_action( 'wp_enqueue_scripts', 'prefix_enqueue_awesome' );
-
 
 
 /* Enable Post Thumbnails */
@@ -186,3 +175,29 @@ function cptui_register_my_cpts() {
 
 
 // add_filter('show_admin_bar', '__return_false');
+
+	function my_login_logo() { ?>
+	    <style type="text/css">
+	        body.login div#login h1 a {
+	            background-image: url(<?php echo get_bloginfo( 'template_directory' ) ?>/images/favicons/apple-touch-icon-120x120.png);
+				display: block;
+				background-size: contain;
+	        }
+	    </style>
+	<?php }
+	add_action( 'login_enqueue_scripts', 'my_login_logo' );
+	function my_login_logo_url() {
+	    return get_bloginfo( 'url' );
+	}
+	add_filter( 'login_headerurl', 'my_login_logo_url' );
+	// First, create a function that includes the path to your favicon
+	function add_favicon() {
+	  	$favicon_url = get_stylesheet_directory_uri() . '/images/favicons/favicon.ico';
+		echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
+	}
+	  
+	// Now, just make sure that function runs when you're on the login page and admin pages  
+	add_action('login_head', 'add_favicon');
+	add_action('admin_head', 'add_favicon');
+
+?>
